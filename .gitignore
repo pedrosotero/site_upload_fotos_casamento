@@ -1,0 +1,42 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Ambientes Virtuais (Venv) ---
+venv/
+env/
+.venv/
+.env
+
+# --- Distribuição / Instalação ---
+dist/
+build/
+*.egg-info/
+
+# --- IDEs e Editores ---
+.vscode/
+.idea/
+*.swp
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Logs e Banco de Dados Local (se houver) ---
+*.log
+*.sqlite3
+
+# --- FLASK ---
+instance/
+.webassets-cache
+
+# --- SEGURANÇA / SECRETS (MUITO IMPORTANTE) ---
+# Ignora o arquivo de credenciais do Google
+credentials.json
+client_secret.json
+token.json
+service_account.json
+
+# Caso você tenha renomeado a chave, adicione o nome aqui:
+# minha-chave-google.json

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sucesso - Casamento Pedro & Sarah</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- MESMAS VARIÁVEIS E ESTILOS GERAIS DO INDEX --- */
+        :root {
+            --primary-gold: #D4AF37;
+            --soft-pink: #FFF0F5;
+            --dark-pink: #E6BCCD;
+            --text-dark: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--soft-pink);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        .main-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        /* Tipografia */
+        h1.wedding-title {
+            font-family: 'Great Vibes', cursive;
+            color: var(--primary-gold);
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+        }
+
+        /* Card Principal */
+        .upload-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            padding: 40px 20px; /* Aumentei um pouco o padding vertical */
+            margin: 20px;
+            border: 1px solid white;
+        }
+
+        /* Logo */
+        .wedding-logo {
+            max-width: 120px;
+            margin-bottom: 15px;
+            /* Se sua logo for redonda/transparente, ajuste as bordas aqui */
+            border-radius: 50%;
+            border: 3px solid var(--primary-gold);
+            padding: 5px;
+        }
+
+        /* Botão (Mesmo estilo do enviar) */
+        .btn-submit {
+            background: var(--primary-gold);
+            background: linear-gradient(45deg, #D4AF37, #E5C158);
+            border: none;
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.2s;
+            text-decoration: none; /* Importante para link parecer botão */
+            display: block; /* Ocupa largura toda */
+        }
+
+        .btn-submit:hover {
+            color: white; /* Garante texto branco no hover */
+            opacity: 0.95;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        /* --- ESTILOS ESPECÍFICOS DA PÁGINA DE SUCESSO --- */
+        
+        .success-icon {
+            font-size: 5rem;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+            animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .success-message h2 {
+            font-weight: 600;
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+        }
+
+        .success-message p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Animação simples de entrada do ícone */
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="main-container text-center">
+
+        <header>
+            <img src="{{ url_for('static', filename='img/logo_casamento.png') }}" alt="Logo Casamento" class="wedding-logo">
+            <h1 class="wedding-title">Pedro & Sarah</h1>
+            <p class="subtitle">Obrigado pelo carinho!</p>
+        </header>
+
+        <div class="upload-card">
+            
+            <div class="success-content">
+                <i class="fas fa-check-circle success-icon"></i>
+
+                <div class="success-message">
+                    <h2>Fotos Recebidas!</h2>
+                    <p>
+                        Suas fotos já estão salvas no nosso álbum digital.<br>
+                        Adoramos ver a festa pelos seus olhos!
+                    </p>
+                </div>
+
+                <a href="/" class="btn btn-submit shadow-sm">
+                    <i class="fas fa-camera-retro me-2"></i> Enviar mais fotos
+                </a>
+                
+                <div class="mt-3">
+                    <small class="text-muted">
+                        Tem fotos de outro momento (Recepção/Igreja)? <br>
+                        Clique acima para enviar.
+                    </small>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="mt-5 text-muted small">
+            <p>&copy; 2025 Casamento Pedro & Sarah</p>
+        </footer>
+
+    </div>
+
+</body>
+
+</html>

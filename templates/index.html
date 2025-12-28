@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotos - Casamento Pedro & Sarah</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-gold: #D4AF37;
+            --soft-pink: #FFF0F5;
+            --dark-pink: #E6BCCD;
+            --text-dark: #4A4A4A;
+        }
+
+        body {
+            background-color: var(--soft-pink);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+
+        .main-container {
+            max-width: 600px;
+            /* Limita largura em telas grandes, ideal para mobile look */
+            margin: 0 auto;
+            padding-top: 20px;
+            padding-bottom: 40px;
+        }
+
+        /* Tipografia */
+        h1.wedding-title {
+            font-family: 'Great Vibes', cursive;
+            color: var(--primary-gold);
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #888;
+        }
+
+        /* Card Principal */
+        .upload-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            padding: 30px 20px;
+            margin: 20px;
+            border: 1px solid white;
+        }
+
+        /* Logo */
+        .wedding-logo {
+            max-width: 120px;
+            margin-bottom: 15px;
+            /* Se não tiver logo ainda, isso cria um círculo placeholder */
+            border-radius: 50%;
+            border: 3px solid var(--primary-gold);
+            padding: 5px;
+        }
+
+        /* Inputs Customizados */
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            padding: 12px;
+            background-color: #fcfcfc;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+        }
+
+        /* Seletor de Local (Radio Buttons Visuais) */
+        .location-selector {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .location-option {
+            flex: 1;
+            position: relative;
+        }
+
+        .location-option input {
+            display: none;
+            /* Esconde o radio button original */
+        }
+
+        .location-card {
+            display: block;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #aaa;
+        }
+
+        .location-card i {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        /* Estado Selecionado */
+        .location-option input:checked+.location-card {
+            border-color: var(--primary-gold);
+            background-color: #fff9e6;
+            /* Dourado muito claro */
+            color: var(--primary-gold);
+            font-weight: 600;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2);
+        }
+
+        /* Botão de Upload Arquivo */
+        .file-upload-wrapper {
+            position: relative;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .btn-file {
+            background-color: var(--dark-pink);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: inline-block;
+            width: 100%;
+            transition: 0.3s;
+            border: none;
+            font-weight: 600;
+        }
+
+        .btn-file:hover {
+            background-color: #d4a5b8;
+        }
+
+        /* Botão Enviar */
+        .btn-submit {
+            background: var(--primary-gold);
+            background: linear-gradient(45deg, #D4AF37, #E5C158);
+            border: none;
+            color: white;
+            padding: 15px;
+            border-radius: 12px;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: transform 0.2s;
+        }
+
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+
+        /* Overlay de Loading */
+        #loadingOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner-gold {
+            color: var(--primary-gold);
+            width: 3rem;
+            height: 3rem;
+        }
+
+        /* Aviso Personalizado */
+        .custom-alert {
+            background-color: #fff9e6;
+            /* Dourado muito suave */
+            border: 1px dashed var(--primary-gold);
+            color: #665c3b;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+            text-align: left;
+        }
+
+        .custom-alert strong {
+            color: var(--text-dark);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="loadingOverlay">
+        <div class="spinner-border spinner-gold" role="status"></div>
+        <h4 class="mt-3" style="color: var(--primary-gold)">Enviando suas fotos...</h4>
+        <p class="text-muted">Por favor, aguarde um momento.</p>
+    </div>
+
+    <div class="main-container text-center">
+
+        <header>
+            <img src="{{ url_for('static', filename='img/logo_casamento.png') }}" alt="Logo Casamento"
+                class="wedding-logo">
+            <h1 class="wedding-title">Pedro & Sarah</h1>
+            <p class="subtitle">Compartilhe seus momentos conosco</p>
+        </header>
+
+        <div class="upload-card">
+            <form action="/" method="POST" enctype="multipart/form-data" id="uploadForm">
+
+                <div class="mb-4 text-start">
+                    <label for="guest_name" class="form-label fw-bold small text-muted">SEU NOME</label>
+                    <input type="text" class="form-control" id="guest_name" name="guest_name"
+                        placeholder="Ex: Vovó Edileusa" required>
+                </div>
+
+                <div class="mb-4 text-start">
+                    <label class="form-label fw-bold small text-muted">ONDE FOI TIRADA?</label>
+                    <div class="location-selector">
+
+                        <div class="location-option">
+                            <input type="radio" name="location" id="loc_igreja" value="Igreja" checked>
+                            <label for="loc_igreja" class="location-card">
+                                <i class="fas fa-church"></i>
+                                <div>Igreja</div>
+                            </label>
+                        </div>
+
+                        <div class="location-option">
+                            <input type="radio" name="location" id="loc_recepcao" value="Recepção">
+                            <label for="loc_recepcao" class="location-card">
+                                <i class="fas fa-glass-cheers"></i>
+                                <div>Recepção</div>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="alert custom-alert fade show" role="alert">
+                    <div class="d-flex align-items-start">
+                        <i class="fas fa-heart me-3 mt-1" style="color: var(--primary-gold);"></i>
+                        <div>
+                            <strong>Tem fotos dos dois momentos?</strong><br>
+                            <span style="font-size: 0.9rem;">
+                                Para nos ajudar a organizar, faça envios separados: primeiro envie as da <b>Igreja</b>,
+                                depois envie as da <b>Recepção</b>.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="mb-4">
+                    <label for="files" class="btn-file">
+                        <i class="fas fa-camera me-2"></i> Escolher Fotos/Vídeos
+                    </label>
+                    <input type="file" id="files" name="files[]" multiple accept="image/*,video/*"
+                        style="display: none;" onchange="updateFileName(this)">
+                    <div id="file-feedback" class="mt-2 text-muted small fst-italic">Nenhum arquivo selecionado</div>
+                </div>
+
+                <button type="submit" class="btn btn-submit shadow-sm">
+                    Enviar Fotos
+                </button>
+
+            </form>
+        </div>
+
+        <footer class="mt-5 text-muted small">
+            <p>&copy; 2025 Casamento Pedro & Sarah</p>
+        </footer>
+
+    </div>
+
+    <script>
+        // 1. Lógica de Cookies/LocalStorage para o Nome
+        document.addEventListener('DOMContentLoaded', function () {
+            const nameInput = document.getElementById('guest_name');
+            const savedName = localStorage.getItem('wedding_guest_name');
+
+            if (savedName) {
+                nameInput.value = savedName;
+            }
+
+            nameInput.addEventListener('input', function () {
+                localStorage.setItem('wedding_guest_name', this.value);
+            });
+        });
+
+        // 2. Feedback visual de quantos arquivos foram escolhidos
+        function updateFileName(input) {
+            const feedback = document.getElementById('file-feedback');
+            if (input.files && input.files.length > 0) {
+                feedback.textContent = `${input.files.length} arquivo(s) selecionado(s)`;
+                feedback.style.color = '#D4AF37';
+                feedback.style.fontWeight = 'bold';
+            } else {
+                feedback.textContent = 'Nenhum arquivo selecionado';
+                feedback.style.color = '#aaa';
+                feedback.style.fontWeight = 'normal';
+            }
+        }
+
+        // 3. Mostrar overlay de Loading ao enviar
+        document.getElementById('uploadForm').addEventListener('submit', function (e) {
+            const files = document.getElementById('files').files;
+            if (files.length === 0) {
+                e.preventDefault();
+                alert('Por favor, selecione pelo menos uma foto!');
+                return;
+            }
+            // Mostra o loading
+            document.getElementById('loadingOverlay').style.display = 'flex';
+        });
+    </script>
+</body>
+
+</html>
