@@ -5,8 +5,11 @@ from googleapiclient.discovery import build
 from werkzeug.utils import secure_filename
 import mimetypes
 import threading
+import logging
 import uuid
 import os
+
+logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024
@@ -33,32 +36,38 @@ def authenticate_drive():
 
 
 def upload_to_drive(file_path, unique_filename, id_pasta_drive):
-    drive_service = authenticate_drive()
-    
-    # Descobre o tipo do arquivo (imagem/jpeg, video/mp4, etc)
-    mime_type, _ = mimetypes.guess_type(file_path)
-    if mime_type is None:
-        mime_type = 'application/octet-stream'
-    
-    # Metadados para o Drive
-    file_metadata = {
-        'name': unique_filename,
-        'parents': [id_pasta_drive]
-    }
-    
-    with open(file_path, 'rb') as f:
-        # Usamos MediaIoBaseUpload em vez de MediaFileUpload
-        media = MediaIoBaseUpload(f, mimetype=mime_type, resumable=True)
+    try:
+        drive_service = authenticate_drive()
         
-        # O upload acontece enquanto o arquivo está aberto
-        drive_service.files().create(
-            body=file_metadata, 
-            media_body=media, 
-            fields='id'
-        ).execute()
+        # Descobre o tipo do arquivo (imagem/jpeg, video/mp4, etc)
+        mime_type, _ = mimetypes.guess_type(file_path)
+        if mime_type is None:
+            mime_type = 'application/octet-stream'
+        
+        # Metadados para o Drive
+        file_metadata = {
+            'name': unique_filename,
+            'parents': [id_pasta_drive]
+        }
+        
+        with open(file_path, 'rb') as f:
+            # Usamos MediaIoBaseUpload em vez de MediaFileUpload
+            media = MediaIoBaseUpload(f, mimetype=mime_type, resumable=True)
+            
+            # O upload acontece enquanto o arquivo está aberto
+            drive_service.files().create(
+                body=file_metadata, 
+                media_body=media, 
+                fields='id'
+            ).execute()
+        
+        os.remove(file_path)
     
-    os.remove(file_path)
-
+        logging.info(f"Arquivo '{unique_filename}' enviado para o Google Drive com sucesso!")
+        
+    except Exception as e:
+        logging.error(f"Erro no arquivo '{unique_filename}': {e}")
+        
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -90,7 +99,7 @@ def index():
             # Sanitiza nome e adiciona UUID para evitar sobrescrita
             original_filename = secure_filename(file.filename)
             extension = original_filename.rsplit('.', 1)[1].lower() if '.' in original_filename else 'jpg'
-            unique_filename = f"{safe_guest_name}_{uuid.uuid4().hex[:8]}.{extension}"
+            unique_filename = f"{safe_guest_name}_{uuid.uuid4().hex}.{extension}"
             file_path = os.path.join(UPLOAD_FOLDER, unique_filename)
             
             # Salva temporariamente no servidor
