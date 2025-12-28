@@ -1,0 +1,33 @@
+/* --- ESTILOS ESPECÍFICOS DA PÁGINA DE SUCESSO --- */
+.success-icon {
+    font-size: 5rem;
+    color: var(--primary-gold);
+    margin-bottom: 20px;
+    animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.success-message h2 {
+    font-weight: 600;
+    color: var(--primary-gold);
+    margin-bottom: 15px;
+}
+
+.success-message p {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Animação simples de entrada do ícone */
+@keyframes popIn {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

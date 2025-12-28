@@ -1,0 +1,224 @@
+:root {
+    --primary-gold: #D4AF37;
+    --soft-pink: #FFF0F5;
+    --dark-pink: #E6BCCD;
+    --text-dark: #4A4A4A;
+}
+
+body {
+    background-color: var(--soft-pink);
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-dark);
+    min-height: 100vh;
+}
+
+.main-container {
+    max-width: 600px;
+    /* Limita largura em telas grandes, ideal para mobile look */
+    margin: 0 auto;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+/* Tipografia */
+h1.wedding-title {
+    font-family: 'Great Vibes', cursive;
+    color: var(--primary-gold);
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #888;
+}
+
+/* Card Principal */
+.upload-card {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    padding: 30px 20px;
+    margin: 20px;
+    border: 1px solid white;
+}
+
+/* Logo */
+.wedding-logo {
+    max-width: 120px;
+    margin-bottom: 15px;
+    /* Se não tiver logo ainda, isso cria um círculo placeholder */
+    border-radius: 50%;
+    border: 3px solid var(--primary-gold);
+    padding: 5px;
+}
+
+/* Inputs Customizados */
+.form-control {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 12px;
+    background-color: #fcfcfc;
+}
+
+.form-control:focus {
+    border-color: var(--primary-gold);
+    box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+}
+
+/* Seletor de Local (Radio Buttons Visuais) */
+.location-selector {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.location-option {
+    flex: 1;
+    position: relative;
+}
+
+.location-option input {
+    display: none;
+    /* Esconde o radio button original */
+}
+
+.location-card {
+    display: block;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #aaa;
+}
+
+.location-card i {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Estado Selecionado */
+.location-option input:checked+.location-card {
+    border-color: var(--primary-gold);
+    background-color: #fff9e6;
+    /* Dourado muito claro */
+    color: var(--primary-gold);
+    font-weight: 600;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.2);
+}
+
+/* Botão de Upload Arquivo */
+.file-upload-wrapper {
+    position: relative;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.btn-file {
+    background-color: var(--dark-pink);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+    transition: 0.3s;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-file:hover {
+    background-color: #d4a5b8;
+}
+
+/* Botão Enviar */
+.btn-submit {
+    background: var(--primary-gold);
+    background: linear-gradient(45deg, #D4AF37, #E5C158);
+    border: none;
+    color: white;
+    padding: 15px;
+    border-radius: 12px;
+    width: 100%;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.2s;
+}
+
+.btn-submit:active {
+    transform: scale(0.98);
+}
+
+/* Overlay de Loading */
+#loadingOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 9999;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner-gold {
+    color: var(--primary-gold);
+    width: 3rem;
+    height: 3rem;
+}
+
+/* Aviso Personalizado */
+.custom-alert {
+    background-color: #fff9e6;
+    /* Dourado muito suave */
+    border: 1px dashed var(--primary-gold);
+    color: #665c3b;
+    border-radius: 12px;
+    padding: 15px;
+    margin-top: 15px;
+    text-align: left;
+}
+
+.custom-alert strong {
+    color: var(--text-dark);
+}
+
+/* Botão de ver senha */
+.btn-toggle-password {
+    background-color: #fcfcfc;
+    border: 1px solid #ddd;
+    border-left: none;
+    /* Remove a borda entre o input e o botão */
+    color: #aaa;
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+    z-index: 0;
+    /* Evita sobrepor o foco do input */
+}
+
+.btn-toggle-password:hover,
+.btn-toggle-password:focus {
+    background-color: #fcfcfc;
+    border-color: #ddd;
+    color: var(--primary-gold);
+    /* Ícone fica dourado ao passar o mouse */
+}
+
+/* Ajuste de foco para manter a harmonia quando clica no input */
+.form-control:focus+.btn-toggle-password {
+    border-color: var(--primary-gold);
+    box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+    border-left: none;
+}
