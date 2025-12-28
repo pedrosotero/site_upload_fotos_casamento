@@ -55,6 +55,7 @@ def index():
         
         drive_service = authenticate_drive()
         
+        qtd_fotos = 0
         for file in files:
             if file.filename == '' or not allowed_file(file.filename):
                 continue # Pula arquivos suspeitos
@@ -91,8 +92,9 @@ def index():
                 ).execute()
             
             os.remove(file_path)
+            qtd_fotos += 1
             
-        return render_template('success.html')
+        return render_template('success.html', qtd_fotos=qtd_fotos)
 
     return render_template('index.html')
 

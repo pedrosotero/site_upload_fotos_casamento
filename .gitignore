@@ -40,3 +40,5 @@ service_account.json
 
 # Caso você tenha renomeado a chave, adicione o nome aqui:
 # minha-chave-google.json
+
+tmp/
