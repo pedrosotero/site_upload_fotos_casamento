@@ -238,6 +238,19 @@
                 </div>
 
                 <div class="mb-4 text-start">
+                    <label for="senha" class="form-label fw-bold small text-muted">SENHA</label>
+                    <input type="password" class="form-control" id="senha" name="senha"
+                        placeholder="Senha da festa (está na mesa junto ao QR Code)" required>
+
+                    {% if senha_incorreta %}
+                    <div class="text-danger small mt-1 fw-bold">
+                        <i class="fas fa-exclamation-circle me-1"></i> Senha incorreta, tente novamente.
+                    </div>
+                    {% endif %}
+                    
+                </div>
+
+                <div class="mb-4 text-start">
                     <label class="form-label fw-bold small text-muted">ONDE FOI TIRADA?</label>
                     <div class="location-selector">
 

@@ -34,9 +34,12 @@ def authenticate_drive():
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
-        render_template('index.html')
+        return render_template('index.html', senha_incorreta=False)
         
     if request.method == 'POST':
+        if request.form.get('senha', '') != 'vivaosnoivos':
+            return render_template('index.html', senha_incorreta=True)
+            
         if 'files[]' not in request.files:
             return redirect(request.url)
         
