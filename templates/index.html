@@ -208,6 +208,32 @@
         .custom-alert strong {
             color: var(--text-dark);
         }
+
+        /* Botão de ver senha */
+        .btn-toggle-password {
+            background-color: #fcfcfc;
+            border: 1px solid #ddd;
+            border-left: none; /* Remove a borda entre o input e o botão */
+            color: #aaa;
+            border-top-right-radius: 10px !important;
+            border-bottom-right-radius: 10px !important;
+            z-index: 0; /* Evita sobrepor o foco do input */
+        }
+
+        .btn-toggle-password:hover, 
+        .btn-toggle-password:focus {
+            background-color: #fcfcfc;
+            border-color: #ddd;
+            color: var(--primary-gold); /* Ícone fica dourado ao passar o mouse */
+        }
+
+        /* Ajuste de foco para manter a harmonia quando clica no input */
+        .form-control:focus + .btn-toggle-password {
+            border-color: var(--primary-gold);
+            box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+            border-left: none;
+        }
+
     </style>
 </head>
 
@@ -239,15 +265,19 @@
 
                 <div class="mb-4 text-start">
                     <label for="senha" class="form-label fw-bold small text-muted">SENHA</label>
-                    <input type="password" class="form-control" id="senha" name="senha"
-                        placeholder="Senha da festa (está na mesa junto ao QR Code)" required>
-
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha da festa"
+                            required style="border-right: none;">
+                        <button class="btn btn-outline-secondary btn-toggle-password" type="button" id="togglePassword">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
                     {% if senha_incorreta %}
                     <div class="text-danger small mt-1 fw-bold">
                         <i class="fas fa-exclamation-circle me-1"></i> Senha incorreta, tente novamente.
                     </div>
                     {% endif %}
-                    
+
                 </div>
 
                 <div class="mb-4 text-start">
@@ -348,6 +378,21 @@
             }
             // Mostra o loading
             document.getElementById('loadingOverlay').style.display = 'flex';
+        });
+
+        // Lógica do Olho Mágico (Ver/Ocultar Senha)
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('senha');
+
+        togglePassword.addEventListener('click', function () {
+            // Alterna o tipo do input
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Alterna o ícone (olho aberto / fechado)
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
         });
     </script>
 </body>
