@@ -145,7 +145,7 @@
                 <div class="success-message">
                     <h2>Fotos Recebidas!</h2>
                     <p>
-                        Suas {{ qtd_fotos }} fotos enviadas já estão sendo salvas no nosso álbum digital.<br>
+                        {{'Suas' if qtd_fotos >= 2 else 'Sua'}} {{ qtd_fotos }} {{'fotos enviadas já estão sendo salvas' if qtd_fotos >= 2 else 'foto enviada já está sendo salva'}} no nosso álbum digital.<br>
                         Adoramos ver a festa pelos seus olhos!
                     </p>
                 </div>
