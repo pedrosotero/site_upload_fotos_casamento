@@ -19,6 +19,10 @@ ID_PASTA_IGREJA = '1-sJV6ANRh2_nx-7FkR5winl0i4lbTn5v'
 ID_PASTA_RECEPCAO = '1a0mfkNXzrvvEJcqGVtukNUzvnZ5RaY5y'
 
 
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'GET':
