@@ -64,5 +64,11 @@ def index():
 
     return render_template('index.html')
 
+
+@app.errorhandler(413)
+def request_entity_too_large(error):
+    return render_template('error_413.html'), 413
+
+
 if __name__ == '__main__':
     app.run(debug=False)
