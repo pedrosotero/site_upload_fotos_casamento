@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // 2. Feedback visual de quantos arquivos foram escolhidos
-const MAX_FILE_SIZE = 50 * 1024 * 1024;
+const MAX_FILE_SIZE = 25 * 1024 * 1024;
 
 function updateFileName(input) {
     const feedback = document.getElementById('file-feedback');
@@ -35,7 +35,7 @@ function updateFileName(input) {
             feedback.innerHTML = `
                 <span class="text-danger fw-bold">
                     <i class="fas fa-exclamation-triangle"></i> 
-                    Arquivo muito grande (Máx 50MB):<br>
+                    Arquivo muito grande (Máx 25MB):<br>
                     ${invalidFiles.join(', ')}
                 </span>`;
 
